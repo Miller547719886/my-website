@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>
+    1. 上传带密码的pdf
+    2. 输入密码
+    3. 点击「生成无密码pdf」即可获得无密码版本pdf文件。
+  </p>
+  <div>
+    <input id="fileInput" type="file">
+  </div>
+  <div>
+    <input id="inputPassword" type="text" placeholder="请输入密码" />
+    <button id="genPdf">生成无密码pdf</button>
+  </div>
+  <script>
+    let pdf = null;
+    let newPdf = null;
+    let password = '';
+    let fileInput = document.querySelector("#fileInput");
+    fileInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      console.log(files);
+      if (!files || files.length === 0) return;
+      let file = files[0];
+      if (file) {
+        pdf = file;
+      }
+    });
+
+    const inputPassword = document.querySelector("#inputPassword");
+    inputPassword.addEventListener('change', (e) => {
+      if (e.target.value) {
+        password = e.target.value;
+      }
+    });
+
+    let genPdf = document.querySelector("#genPdf");
+    genPdf.addEventListener('click', (e) => {
+      if (!pdf) return alert('无可下载文件');
+      if (!password) return alert('没有输入密码');
+      console.log(pdf, password);
+      newPdf = pdf;
+    });
+  </script>
+</body>
+</html>
